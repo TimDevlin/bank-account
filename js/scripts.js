@@ -30,13 +30,18 @@ Account.prototype.withdrawl = function(depoNumber) {
 
 // USER INTERFACE LOGIC
 $(function () {
+
+  var newAccount;
+
   $("form#log-in").submit(function(event) {
     event.preventDefault();
 
     var userName = $("input#userName").val();
+
+
     var initialDepo = parseInt($("input#initial-depo").val());
 
-    var newAccount = new Account(userName, initialDepo);
+    newAccount = new Account(userName, initialDepo);
 
     if (userName) {
       if ( isNaN(initialDepo) || initialDepo <= 0) {
@@ -45,9 +50,9 @@ $(function () {
         $("input#userName").val("");
         $("input#initial-depo").val("");
 
-        // $("form#log-in").fadeOut(2000);
-        //
-        // $("form#transAction").fadeIn(2000);
+        $("form#log-in").fadeOut(2000);
+
+        $("form#transAction").fadeIn(2000);
       }
     } else {
       alert("Please Enter a User Name")
@@ -56,7 +61,7 @@ $(function () {
 
   });
 
-  $("button#withDrawl").submit(function(event) {
+  $("button#withDrawl").click(function(event) {
     event.preventDefault();
 
     var depoNumber = $("input#amount").val();
@@ -65,13 +70,13 @@ $(function () {
 
     $("input#amount").val("");
 
-    alert("hi mom");
+    alert(newAccount.userBalance);
 
 
 
   });
 
-  $("button#depoSit").submit(function(event) {
+  $("button#depoSit").click(function(event) {
     event.preventDefault();
 
     var depoNumber = parseInt($("input#amount").val());
